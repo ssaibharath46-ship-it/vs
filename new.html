@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JARVIS - HTML Voice Assistant</title>
+    <style>
+        body {
+            font-family: 'Arial Black', sans-serif;
+            background: linear-gradient(45deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            margin: 0;
+            padding: 50px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .jarvis {
+            font-size: 4em;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px #00ff88;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        button {
+            background: #00ff88;
+            border: none;
+            padding: 15px 30px;
+            font-size: 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            box-shadow: 0 5px 15px rgba(0,255,136,0.4);
+        }
+        button:hover { transform: scale(1.1); }
+        #status {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+        #commands {
+            background: rgba(0,0,0,0.3);
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="jarvis">🤖 JARVIS</div>
+    <div id="status">Click Mic to Start Listening</div>
+    <button onclick="startListening()">🎤 Start Listening</button>
+    <button onclick="speak('JARVIS online!')">🗣️ Test Voice</button>
+    
+    <div id="commands">
+        <h3>📝 Say These Commands:</h3>
+        <p>• "what time is it"</p>
+        <p>• "open youtube"</p>
+        <p>• "open google"</p>
+        <p>• "tell me a joke"</p>
+        <p>• "stop"</p>
+    </div>
+
+    <script>
+        const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+        const synthesis = window.speechSynthesis;
+        
+        recognition.continuous = true;
+        recognition.interimResults = false;
+        recognition.lang = 'en-US';
+        
+        let isListening = false;
+        
+        function speak(text) {
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.rate = 1;
+            utterance.pitch = 1;
+            synthesis.speak(utterance);
+            document.getElementById('status').innerText = `JARVIS: ${text}`;
+        }
+        
+        function startListening() {
+            if (isListening) {
+                recognition.stop();
+                document.getElementById('status').innerText = 'Stopped Listening';
+                return;
+            }
+            
+            recognition.start();
+            isListening = true;
+            document.getElementById('status').innerText = '🟢 Listening... Say a command!';
+        }
+        
+        recognition.onresult = function(event) {
+            const command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+            document.getElementById('status').innerText = `You said: "${command}"`;
+            
+            if (command.includes('time') || command.includes('clock')) {
+                const now = new Date();
+                const time = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                speak(`The time is ${time}`);
+            }
+            else if (command.includes('youtube')) {
+                window.open('https://youtube.com', '_blank');
+                speak('Opening YouTube');
+            }
+            else if (command.includes('google')) {
+                window.open('https://google.com', '_blank');
+                speak('Opening Google');
+            }
+            else if (command.includes('joke')) {
+                const jokes = [
+                    "Why don't scientists trust atoms? Because they make up everything!",
+                    "Why did the scarecrow win an award? He was outstanding in his field!",
+                    "Why don't eggs tell jokes? They'd crack each other up!"
+                ];
+                speak(jokes[Math.floor(Math.random() * jokes.length)]);
+            }
+            else if (command.includes('stop') || command.includes('jarvis stop')) {
+                recognition.stop();
+                speak('Goodbye!');
+            }
+            else {
+                speak("Try: time, youtube, google, joke");
+            }
+        };
+        
+        recognition.onend = function() {
+            isListening = false;
+            document.getElementById('status').innerText = 'Click Mic to Start Listening';
+        };
+        
+        // Auto-start demo
+        speak("HTML JARVIS online! Click microphone to talk");
+    </script>
+</body>
+</html>

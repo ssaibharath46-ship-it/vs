@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daily Water Tracker</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial, sans-serif;
+background:#000;
+color:#00ccff;
+text-align:center;
+padding:30px;
+}
+
+h1{
+font-size:38px;
+text-shadow:0 0 10px #00ccff;
+}
+
+.info{
+max-width:700px;
+margin:auto;
+background:#111;
+padding:20px;
+border:2px solid #00ccff;
+border-radius:10px;
+box-shadow:0 0 15px #00ccff;
+margin-bottom:30px;
+}
+
+.days{
+display:flex;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+}
+
+.day-btn{
+padding:15px 25px;
+font-size:18px;
+border:2px solid #00ccff;
+background:black;
+color:#00ccff;
+cursor:pointer;
+border-radius:10px;
+transition:0.3s;
+}
+
+.day-btn:hover{
+background:#00ccff;
+color:black;
+transform:scale(1.1);
+box-shadow:0 0 15px #00ccff;
+}
+
+.container{
+display:none;
+flex-wrap:wrap;
+gap:20px;
+justify-content:center;
+margin-top:20px;
+}
+
+.card{
+width:250px;
+background:#111;
+padding:15px;
+border:2px solid #00ccff;
+border-radius:10px;
+box-shadow:0 0 10px #00ccff;
+}
+
+.time{
+font-weight:bold;
+margin-bottom:10px;
+}
+
+.back-btn{
+margin-top:20px;
+padding:10px 25px;
+font-size:16px;
+border:2px solid #00ccff;
+background:black;
+color:#00ccff;
+cursor:pointer;
+border-radius:10px;
+}
+
+.back-btn:hover{
+background:#00ccff;
+color:black;
+}
+</style>
+</head>
+
+<body>
+
+<h1>💧 WATER INTAKE TRACKER</h1>
+
+<div id="day-selection">
+
+<div class="info">
+<h2>Stay Hydrated</h2>
+<p>
+Drinking enough water is important for health, energy, and fitness.
+An average person should drink about <b>2–3 liters of water daily</b>.
+</p>
+<p>Select a day to view your hydration plan.</p>
+</div>
+
+<div class="days">
+<div class="day-btn" onclick="showPlan('monday')">MONDAY</div>
+<div class="day-btn" onclick="showPlan('tuesday')">TUESDAY</div>
+<div class="day-btn" onclick="showPlan('wednesday')">WEDNESDAY</div>
+<div class="day-btn" onclick="showPlan('thursday')">THURSDAY</div>
+<div class="day-btn" onclick="showPlan('friday')">FRIDAY</div>
+<div class="day-btn" onclick="showPlan('saturday')">SATURDAY</div>
+<div class="day-btn" onclick="showPlan('sunday')">SUNDAY</div>
+</div>
+
+</div>
+
+<!-- Monday -->
+<div id="monday" class="container">
+<h1>MONDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses after waking</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<!-- Tuesday -->
+<div id="tuesday" class="container">
+<h1>TUESDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<!-- Wednesday -->
+<div id="wednesday" class="container">
+<h1>WEDNESDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<!-- Thursday -->
+<div id="thursday" class="container">
+<h1>THURSDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<!-- Friday -->
+<div id="friday" class="container">
+<h1>FRIDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<!-- Saturday -->
+<div id="saturday" class="container">
+<h1>SATURDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<!-- Sunday -->
+<div id="sunday" class="container">
+<h1>SUNDAY PLAN</h1>
+<div class="card"><div class="time">Morning</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Afternoon</div>Drink 3 glasses</div>
+<div class="card"><div class="time">Evening</div>Drink 2 glasses</div>
+<div class="card"><div class="time">Night</div>Drink 1 glass</div>
+<button class="back-btn" onclick="goBack()">BACK</button>
+</div>
+
+<script>
+function showPlan(day){
+document.getElementById("day-selection").style.display="none";
+document.getElementById(day).style.display="flex";
+}
+
+function goBack(){
+document.querySelectorAll(".container").forEach(c=>c.style.display="none");
+document.getElementById("day-selection").style.display="block";
+}
+</script>
+
+</body>
+</html>
